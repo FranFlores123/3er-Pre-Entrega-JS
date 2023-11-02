@@ -244,6 +244,11 @@ p {
   font-size: 1.1rem;
 }
 
+.info-carrito h3 {
+  font-size: 1.2rem;
+  padding-bottom: 0.3rem;
+}
+
 .carrito-eliminar {
   color: var(--clr-darkOrange);
   border: 0;
@@ -260,6 +265,31 @@ p {
 .carrito-eliminar:hover {
   color: var(--clr-white);
   background-color: var(--clr-darkOrange);
+}
+
+.botones-cantidad {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-sumar-restar {
+  display: flex;
+  color: var(--clr-darkOrange);
+  border: 0;
+  font-size: 1.4rem;
+  cursor: pointer;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.boton-sumar-restar:hover {
+  color: var(--clr-white);
+  background-color: var(--clr-darkOrange);
+
 }
 
 .carrito-vaciar-comprar {

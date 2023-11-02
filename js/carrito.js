@@ -10,17 +10,13 @@ const carritoVaciar = document.querySelector("#boton-vaciar");
 let botonEliminar = document.querySelector(".carrito-eliminar");
 const total = document.querySelector("#total");
 const comprar = document.querySelector("#boton-comprar");
-
-function actualizarCantidad() {
-    let nuevaCantidad = carrito.reduce((acc, pizza) => acc + pizza.cantidad, 0);
-    cantidadCarrito.innerText = nuevaCantidad;
-    localStorage.setItem("cantidad", JSON.stringify(nuevaCantidad));
-}
-
+let botonSumar = document.querySelectorAll(".boton-sumar");
+let botonRestar = document.querySelectorAll(".boton-restar");
+let cantidadPizza = document.querySelectorAll("#cantidad-pizza");
+console.log (cantidadPizza);
 
 
 function cargarCarrito() {
-    
 
     if (carrito && carrito.length > 0) {
 
@@ -41,8 +37,12 @@ function cargarCarrito() {
                 <h4>${pizza.categoria}</h4>
             </div>
             <div class="info-carrito">
-                <h3>cantidad</h3>
-                <h4>${pizza.cantidad}</h4>
+                <h3>Cantidad</h3>
+                <div class="botones-cantidad">
+                <button id=${pizza.id} class="boton-sumar-restar boton-restar"><i class='bx bx-minus'></i></button>
+                <span id="cantidad-pizza" class="cantidad">${pizza.cantidad}</span>
+                <button id=${pizza.id} class="boton-sumar-restar boton-sumar"><i class='bx bx-plus'></i></button>
+                </div>
             </div>
             <div class="info-carrito">
                 <h3>Precio</h3>
@@ -64,13 +64,17 @@ function cargarCarrito() {
         carritoAcciones.classList.add("ocultar");
         carritoGracias.classList.add("ocultar");
     }
-
+  
+    actualizarSumar();
     botonesEliminar();
     actualizarCantidad();
     actualizarTotal();
+
 }
 
 cargarCarrito();
+
+                     /* Boton Eliminar */
 
 function botonesEliminar() {
     botonEliminar = document.querySelectorAll(".carrito-eliminar");
@@ -81,7 +85,6 @@ function botonesEliminar() {
      
     let nuevaCantidad = JSON.parse(localStorage.getItem("cantidad"));
     cantidadCarrito.innerText = nuevaCantidad;
-
   }
 
 function eliminarPizza(e) {
@@ -94,6 +97,8 @@ function eliminarPizza(e) {
     localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
   }
 
+                     /* Boton Vaciar */
+
   carritoVaciar.addEventListener("click", vaciarCarrito);
 
   function vaciarCarrito() {
@@ -101,6 +106,8 @@ function eliminarPizza(e) {
     localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
     cargarCarrito();
   }
+
+                     /* Boton Comprar y Total */
 
   function actualizarTotal() {
     const calculoTotal = carrito.reduce((acc, pizza) => acc + (pizza.precio * pizza.cantidad), 0);
@@ -118,3 +125,41 @@ function eliminarPizza(e) {
     carritoGracias.classList.remove("ocultar");
     cantidadCarrito.innerText = 0;
   }
+
+
+  function actualizarCantidad() {
+    let nuevaCantidad = carrito.reduce((acc, pizza) => acc + pizza.cantidad, 0);
+    cantidadCarrito.innerText = nuevaCantidad;
+    localStorage.setItem("cantidad", JSON.stringify(nuevaCantidad));
+  }
+
+
+
+                     /* Botones Sumar y Restar */
+
+
+function actualizarSumar() {
+  botonSumar = document.querySelectorAll(".boton-sumar");
+
+  botonSumar.forEach(boton => {
+    boton.addEventListener("click", sumarAlCarrito);
+  });
+}
+
+function sumarAlCarrito(e){
+  const idPizza = e.currentTarget.id;
+  const agregar = carrito.find((pizza) =>pizza.id === idPizza);
+
+
+  if(carrito.some((pizza)=> pizza.id === idPizza)) {
+    const index = carrito.findIndex(pizza => pizza.id === idPizza);
+    carrito[index].cantidad++;
+
+    actualizarCantidad();
+
+  } else {
+    carrito.push(agregar);
+  }
+
+  localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
+}
