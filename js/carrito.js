@@ -184,8 +184,7 @@ function restarAlCarrito(e){
 }
 
 
-
-/* Boton Vaciar */
+                    /* Boton Vaciar */
 
 carritoVaciar.addEventListener("click", vaciarCarrito);
 
