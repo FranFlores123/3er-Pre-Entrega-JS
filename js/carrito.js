@@ -52,8 +52,10 @@ function cargarCarrito() {
             <h3>Subtotal</h3>
             <h4>$${pizza.precio * pizza.cantidad}</h4>
         </div>
-            <button id=${pizza.id} class="carrito-eliminar"><i class='bx bxs-trash'></i></button>
-            `
+        <div class="carrito-eliminar">
+            <button class="boton-eliminar" id=${pizza.id}><i class='bx bxs-trash'></i></button>
+        </div>
+        `
 
             carritoPizzas.append(div);
 
