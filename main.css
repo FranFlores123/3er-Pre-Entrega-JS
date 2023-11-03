@@ -182,7 +182,7 @@ p {
 .pizza-info button:hover {
   background-color: var(--clr-main);
   color: #000000;
-  transition: 0.2s;
+  transition: 0.15s;
 }
 
 .pizza-imagen {
@@ -193,7 +193,7 @@ p {
 
 .pizza-imagen:hover {
   padding: 5px;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 
@@ -272,6 +272,7 @@ p {
 .boton-eliminar:hover {
   color: var(--clr-white);
   background-color: var(--clr-darkOrange);
+  transition: 0.1s;
 }
 
 .botones-cantidad {
@@ -296,7 +297,7 @@ p {
 .boton-sumar-restar:hover {
   color: var(--clr-white);
   background-color: var(--clr-darkOrange);
-
+  transition: 0.1s;
 }
 
 .carrito-vaciar-comprar {
@@ -328,6 +329,7 @@ p {
 .boton-vaciar:hover {
   background-color: var(--clr-lightOrange);
   color: var(--clr-darkOrange);
+  transition: 0.1s;
 }
 
 .carrito-comprar {

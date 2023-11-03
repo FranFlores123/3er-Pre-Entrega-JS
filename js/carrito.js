@@ -7,7 +7,7 @@ const carritoPizzas = document.querySelector("#carrito-pizzas");
 const carritoAcciones = document.querySelector("#carrito-acciones");
 const carritoGracias = document.querySelector("#carrito-gracias");
 const carritoVaciar = document.querySelector("#boton-vaciar");
-let botonEliminar = document.querySelector(".carrito-eliminar");
+let botonEliminar = document.querySelector(".boton-eliminar");
 const total = document.querySelector("#total");
 const comprar = document.querySelector("#boton-comprar");
 let botonSumar = document.querySelectorAll(".boton-sumar");
@@ -56,7 +56,6 @@ function cargarCarrito() {
             <button class="boton-eliminar" id=${pizza.id}><i class='bx bxs-trash'></i></button>
         </div>
         `
-
             carritoPizzas.append(div);
 
         })
@@ -85,7 +84,7 @@ function actualizarCantidad() {
                      /* Boton Eliminar */
 
 function botonesEliminar() {
-    botonEliminar = document.querySelectorAll(".carrito-eliminar");
+    botonEliminar = document.querySelectorAll(".boton-eliminar");
   
     botonEliminar.forEach(boton => {
       boton.addEventListener("click", eliminarPizza);
@@ -99,6 +98,7 @@ function eliminarPizza(e) {
     const idBoton = e.currentTarget.id;
     const index = carrito.findIndex(pizza => pizza.id === idBoton);
     carrito.splice(index,1);
+
     cargarCarrito(); 
     actualizarCantidad();  
 
