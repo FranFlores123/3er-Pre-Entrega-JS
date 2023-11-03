@@ -66,13 +66,19 @@ function cargarCarrito() {
     }
   
     actualizarSumar();
+    actualizarRestar();
     botonesEliminar();
     actualizarCantidad();
     actualizarTotal();
-
 }
 
 cargarCarrito();
+
+function actualizarCantidad() {
+  let nuevaCantidad = carrito.reduce((acc, pizza) => acc + pizza.cantidad, 0);
+  cantidadCarrito.innerText = nuevaCantidad;
+  localStorage.setItem("cantidad", JSON.stringify(nuevaCantidad));
+}
 
                      /* Boton Eliminar */
 
@@ -97,15 +103,6 @@ function eliminarPizza(e) {
     localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
   }
 
-                     /* Boton Vaciar */
-
-  carritoVaciar.addEventListener("click", vaciarCarrito);
-
-  function vaciarCarrito() {
-    carrito.length = 0;
-    localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
-    cargarCarrito();
-  }
 
                      /* Boton Comprar y Total */
 
@@ -125,15 +122,6 @@ function eliminarPizza(e) {
     carritoGracias.classList.remove("ocultar");
     cantidadCarrito.innerText = 0;
   }
-
-
-  function actualizarCantidad() {
-    let nuevaCantidad = carrito.reduce((acc, pizza) => acc + pizza.cantidad, 0);
-    cantidadCarrito.innerText = nuevaCantidad;
-    localStorage.setItem("cantidad", JSON.stringify(nuevaCantidad));
-  }
-
-
 
                      /* Botones Sumar y Restar */
 
@@ -162,4 +150,49 @@ function sumarAlCarrito(e){
   }
 
   localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
+  cargarCarrito();
+}
+
+
+function actualizarRestar() {
+  botonSumar = document.querySelectorAll(".boton-restar");
+
+  botonSumar.forEach(boton => {
+    boton.addEventListener("click", restarAlCarrito);
+  });
+}
+
+function restarAlCarrito(e){
+  const idPizza = e.currentTarget.id;
+  const agregar = carrito.find((pizza) =>pizza.id === idPizza);
+
+
+  if(carrito.some((pizza)=> pizza.id === idPizza)) {
+    const index = carrito.findIndex(pizza => pizza.id === idPizza);
+
+    if (carrito[index].cantidad > 1) {
+    carrito[index].cantidad--;
+
+    actualizarCantidad();
+  }
+  } else {
+    carrito.push(agregar);
+  }
+
+  localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
+  cargarCarrito();
+}
+
+
+
+/* Boton Vaciar */
+
+carritoVaciar.addEventListener("click", vaciarCarrito);
+
+function vaciarCarrito() {
+  carrito.length = 0;
+  localStorage.setItem("pizzasEnCarrito", JSON.stringify(carrito));
+
+  actualizarCantidad();
+  cargarCarrito();
 }
