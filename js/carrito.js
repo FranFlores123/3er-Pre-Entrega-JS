@@ -13,7 +13,6 @@ const comprar = document.querySelector("#boton-comprar");
 let botonSumar = document.querySelectorAll(".boton-sumar");
 let botonRestar = document.querySelectorAll(".boton-restar");
 let cantidadPizza = document.querySelectorAll("#cantidad-pizza");
-console.log (cantidadPizza);
 
 
 function cargarCarrito() {
